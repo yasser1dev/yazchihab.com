@@ -4,7 +4,7 @@ import { getTILPosts } from 'app/TIL/utils'
 export const baseUrl = 'https://portfolio-blog-starter.vercel.app'
 
 export default async function sitemap() {
-  let blogs = getWritingPosts().map((post) => ({
+  let posts = getWritingPosts().map((post) => ({
     url: `${baseUrl}/writing/${post.slug}`,
     lastModified: post.metadata.publishedAt,
   }))
@@ -19,5 +19,5 @@ export default async function sitemap() {
     lastModified: new Date().toISOString().split('T')[0],
   }))
 
-  return [...routes, ...blogs, ...tils]
+  return [...routes, ...posts, ...tils]
 }
