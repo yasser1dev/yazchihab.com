@@ -11,7 +11,10 @@ type Metadata = {
 function parseFrontmatter(fileContent: string) {
   let frontmatterRegex = /---\s*([\s\S]*?)\s*---/
   let match = frontmatterRegex.exec(fileContent)
-  let frontMatterBlock = match![1]
+  if (!match) {
+    throw new Error(`Failed to parse frontmatter. Content start: ${fileContent.slice(0, 20)}...`)
+  }
+  let frontMatterBlock = match[1]
   let content = fileContent.replace(frontmatterRegex, '').trim()
   let frontMatterLines = frontMatterBlock.trim().split('\n')
   let metadata: Partial<Metadata> = {}
@@ -53,8 +56,8 @@ function getMDXData(dir) {
   })
 }
 
-export function getWritingPosts() {
-  return getMDXData(path.join(process.cwd(), 'app', 'writing', 'posts'))
+export function getTILPosts() {
+  return getMDXData(path.join(process.cwd(), 'app', 'TIL', 'posts'))
 }
 
 export function formatDate(date: string, includeRelative = false) {

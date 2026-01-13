@@ -6,7 +6,10 @@ const navItems = {
   },
   '/writing': {
     name: 'writing',
-  }
+  },
+  '/TIL': {
+    name: 'TIL',
+  },
 }
 
 export function Navbar() {
